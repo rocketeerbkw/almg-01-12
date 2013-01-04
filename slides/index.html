@@ -9,6 +9,20 @@
 
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="css/zenburn.css">
+
+    <style type="text/css">
+      section .block {
+        float: left;
+        width: 50%;
+        text-align: left;
+      }
+
+      ul.small li {
+        font-size: 0.6em;
+        line-height: 1.2em;
+        vertical-align: top;
+      }
+    </style>
     
   </head>
   <body>
@@ -42,7 +56,7 @@
             <li>GPIO, SPI, I<sup>2</sup>C, I<sup>2</sup>S, UART</li>
             <li>Size of a credit card!</li>
           </ul>
-          <div style="float: left">
+          <div class="block">
             <h3>Model A ($25)</h3>
             <ul>
               <li>256 MiB RAM</li>
@@ -50,7 +64,7 @@
               <li>No Networking</li>
             </ul>
           </div>
-          <div>
+          <div class="block">
             <h3>Model B ($35)</h3>
             <ul>
               <li>512 MiB RAM</li>
@@ -61,23 +75,86 @@
         </section>
         <section>
           <h2>OS</h2>
+          <strong style="display: block">Official from <a href="http://www.raspberrypi.org/downloads">raspberrypi.org</a></strong>
           <ul>
-            <li>Official from <a href="http://www.raspberrypi.org/downloads">raspberrypi.org</a>
-              <ul>
-                <li>Raspbian Wheezy: Debian optimized for Raspberry Pi <a href="http://www.raspbian.org">raspbian.org</a></li>
-                <li>"Soft Float" raspbian wheezy available if you <strike>need</strike>want to run Java</li>
-                <li>Arch ARM, RISC OS</li>
-              </ul>
-            </li>
-            <li>Unofficial
-              <ul>
-                <li>Adafruit <a href="http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro/">Occidentallis</a>: Raspbian + support for GPIO, I<sup>2</sup>C, etc</li>
-                <li><a href="http://www.raspbmc.com/">RaspBMC</a>: XBMC port</li>
-              </ul>
+            <li>Raspbian Wheezy: Debian optimized for Raspberry Pi <a href="http://www.raspbian.org">raspbian.org</a></li>
+            <li>"Soft Float" raspbian wheezy available if you <strike>need</strike> want to run Java</li>
+            <li>Arch ARM, RISC OS</li>
+          </ul>
+          <strong style="display: block">Unofficial</strong>
+          <ul>
+            <li>Adafruit <a href="http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro/">Occidentallis</a>: Raspbian + support for GPIO, I<sup>2</sup>C, etc</li>
+            <li><a href="http://www.raspbmc.com/">RaspBMC</a>: XBMC port</li>
           </ul>
         </section>
         <section>
-          <h2>Getting Started</h2>
+            <section>
+              <h2>Getting Started</h2>
+              <h3>Buy</h3>
+              <div class="block">
+                <strong style="display: block">"Official" Distributors</strong>
+                <ul>
+                  <li><a href="http://www.newark.com">Newark.com</a></li>
+                  <li><a href="http://www.alliedelec.com/">Allied Electronics</a></li>
+                </ul>
+                <strong style="display: block">Other Options</strong>
+                <ul>
+                  <li><a href="https://www.adafruit.com/category/105">Adafruit.com</a></li>
+                  <li><a href="https://www.sparkfun.com/categories/233/">Sparkfun.com</a></li>
+                </ul>
+              </div>
+              <div class="block">
+                <ul class="small">
+                  <li>Raspberry Pi</li>
+                  <li>Power Supply: 5v 1A wall wort</li>
+                  <li>USB A -> USB B Micro</li>
+                  <li>SD Card: 4 Gb Class 4</li>
+                  <li>SD Card Reader</li>
+                  <li>Powered USB Hub (<a href="http://elinux.org/RPi_VerifiedPeripherals#Powered_USB_Hubs">verified hubs</a>)</li>
+                  <li>USB WiFi (<a href="http://elinux.org/RPi_VerifiedPeripherals#USB_Wi-Fi_Adapters">verified cards</a>)</li>
+                  <li>USB Keyboard & Mouse</li>
+                  <li>RCA or HDMI Cable (HDMI -> DVI)</li>
+                  <li>3.5mm Audio -> RCA Adapter</li>
+                  <li>IR Remote? Web Cam? Etc.</li>
+                </ul>
+              </div>
+            </section>
+            <section>
+              <h3>Install (<a href="http://elinux.org/RPi_Easy_SD_Card_Setup">Setup Guides</a>)</h3>
+              <p>
+              <ul>
+                <li><a href="http://zenit.senecac.on.ca/wiki/index.php/Raspberry_Pi_Fedora_Remix_Installation#SD_Card_Installation_Using_the_Installer">Fedora ARM Installer</a></li>
+                <li><a href="http://www.berryterminal.com/doku.php/berryboot">BerryBoot Installer</a></li>
+                <li><a href="https://launchpad.net/win32-image-writer/+download">Win32DiskImager</a></li>
+                <li><a hreg="https://alltheware.wordpress.com/2012/12/11/easiest-way-sd-card-setup/">RPi-sd card builder (Mac)</a></li>
+                <li><a href="http://www.raspbmc.com/download/">RaspBMC UI Installer</a></li>
+              </ul>
+            </p>
+              <pre style="word-wrap: initial;"><code>~ $ wget http://downloads.raspberrypi.org/images/raspbian/2012-12-16-wheezy-raspbian/2012-12-16-wheezy-raspbian.zip
+~ $ unzip ~/2012-12-16-wheezy-raspbian.zip
+~ $ umount /dev/sdd1
+~ $ dd bs=4M if=~/2012-12-16-wheezy-raspbian.img of=/dev/sdd
+~ $ sudo sync</code></pre>
+              </ul>
+            </section>
+            <section>
+              <h3>Configure</h3>
+              <p>- First run of raspbian and raspbmc setup guides; Timezone, locale, keyboard, resolution, overclock, etc</p>
+              <p>- /boot/config.txt (<a href="http://elinux.org/RPi_Configuration">Docs</a>)</p>
+            </section>
+            <section>
+              <h3>Gotchas</h3>
+              <ul>
+                <li>No HDMI output: <code>hdmi_safe=1</code></li>
+                <li><a href="http://elinux.org/RPi_Peripherals#Wireless:_TP-Link_TL-WN722N_USB_wireless_adapter_.28Debian_6.29">No WiFi</a>
+                  <ol>
+                    <li>Check <a href="http://elinux.org/RPi_VerifiedPeripherals#USB_Wi-Fi_Adapters">hardware support</a></li>
+                    <li>Download drivers (links available at above link)</li>
+                    <li>Install and configure everything on CLI</li>
+                  </ol>
+                </li>
+              </ul>
+            </section>
         </section>
       </div>
     </div>
@@ -85,7 +162,7 @@
     <script src="js/reveal.js"></script>
     <script>
       Reveal.initialize({
-        controls: false,
+        controls: true,
         progress: false
       });
     </script>
