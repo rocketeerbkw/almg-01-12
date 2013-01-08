@@ -140,8 +140,9 @@
             </section>
             <section>
               <h3>Configure</h3>
-              <p>- First run of raspbian and raspbmc setup guides; Timezone, locale, keyboard, resolution, overclock, etc</p>
+              <p>- First run of raspbian and raspbmc setup guides; Timezone (<strong>America/Chicago</strong>), locale (<strong>en_US.UTF-8</strong>), keyboard, resolution, overclock, etc</p>
               <p>- /boot/config.txt (<a href="http://elinux.org/RPi_Configuration">Docs</a>)</p>
+              <p>- sudo raspi-config</p>
             </section>
             <section>
               <h3>Gotchas</h3>
@@ -163,6 +164,61 @@
           </section>
           <section>
             <h2>GPIO</h2>
+            <img src="gpios.png" alt="GPIO Pin Layout" style="float: left;" />
+            <ul>
+              <li>Up to 17 GPIO pins</li>
+              <li>0 analog pins (no onboard ADC)</li>
+              <li>Control using Python, Bash, <br>C, <a href="https://code.google.com/p/webiopi/">WebIOPi</a> (others to come?)</li>
+            </ul>
+          </section>
+          <section>
+            <div class="block">
+              <strong>Python</strong>
+              <pre style="word-wrap: initial;"><code>import RPi.GPIO as GPIO
+GPIO.setup(7, GPIO.OUT)
+GPIO.output(7, True)
+GPIO.output(7,False)</code></pre>
+              <strong>Bash (everything is a file)</strong>
+              <pre style="word-wrap: initial;"><code>sudo su -
+echo "4" > /sys/class/gpio/export
+echo "4" > /sys/class/gpio/export
+echo "out" > /sys/class/gpio/gpio4/direction
+echo "1" > /sys/class/gpio/gpio4/value
+echo "0" > /sys/class/gpio/gpio4/value
+echo "0" > /sys/class/gpio/export
+echo "in" > /sys/class/gpio/gpio0/direction
+cat /sys/class/gpio/gpio0/value</code></pre>
+            </div>
+            <div class="block">
+              <strong>C (with wiringPi library)</strong>
+              <pre><code>#include <wiringPi.h>
+#include <stdio.h>
+ 
+int main (void)
+{
+  int pin = 7;
+ 
+  if (wiringPiSetup() == -1)
+    exit (1);
+ 
+  pinMode(pin, OUTPUT);
+ 
+  for (;;){
+    printf("LED On\n");
+    digitalWrite(pin, 1);
+    delay(250);
+    printf("LED Off\n");
+    digitalWrite(pin, 0);
+    delay(250);
+  }
+ 
+  return 0;
+}</code></pre>
+            </div>
+          </section>
+          <section>
+            <h2>Demo</h2>
+            <iframe src="http://rocketeerbkw.com" style="width: 100%; height: 100%;"></iframe>
           </section>
         </section>
         <section>
@@ -179,6 +235,37 @@
               There are playlist and slideshow functions, a weather forecast feature and many audio visualizations.
             </blockquote>
           </section>
+        </section>
+        <section>
+          <h2>Resources</h2>
+          <div class="block">
+            <a href="http://www.raspberrypi.org/">www.raspberrypi.org</a><br>
+            <a href="http://elinux.org/RPi_Hub">elinux.org/RPi_Hub</a><br>
+            <a href="http://www.raspbian.org/">www.raspbian.org/</a><br>
+            <a href="http://www.raspbmc.com/">www.raspbmc.com/</a><br>
+            <a href="http://www.jeremymorgan.com/tutorials/raspberry-pi/how-to-raspberry-pi-web-server/">RPi Webserver</a><br>
+            <a href="http://pipress.vo3.net/?p=6">Wordpress on RPi</a><br>
+            <a href="http://pipress.vo3.net/?p=16">RPi Survives HN</a><br>
+            <a href="http://pingbin.com/2012/12/30-cool-ideas-raspberry-pi-project/">40+ Cool Ideas for RPi</a><br>
+          </div>
+          <div class="block">
+            <a href="http://garmoncheg.blogspot.com/2012/11/time-capsule-for-25.html">Time Capsule for $25</a><br>
+            <a href="http://bendyworks.com/geekville/lab_projects/2012/11/getting-plan-9-running-on-the-raspberry-pi">Running Plan 9 on RPi</a><br>
+            <a href="http://reviews.cnet.co.uk/desktops/25-fun-things-to-do-with-a-raspberry-pi-50009851/">25 fun things to do</a><br>
+            <a href="http://downloads.raspberrypi.org/Raspberry_Pi_Education_Manual.pdf">RPi Education Manual (PDF)</a><br>
+            <a href="http://arstechnica.com/information-technology/2012/12/10-raspberry-pi-creations-that-show-how-amazing-the-tiny-pc-can-be/">10 Amazing RPi Creations</a><br>
+            <a href="http://raspberrypihacks.com/">raspberrypihacks.com/</a><br>
+            <a href="http://www.hanselman.com/blog/ManyRaspberryPiProjectsHowCanYouNotLoveATinyComputer.aspx">How can you not love a tiny computer?</a><br>
+
+          </div>
+        </section>
+        <section>
+          <h2>Brandon Williams</h2>
+          <p>
+            <a href="http://twitter.com/rocketeerbkw">@rocketeerbkw</a><br>
+            <a href="mailto:rocketeerbkw@gmail.com">rocketeerbkw@gmail.com</a><br>
+            <a hreg="http://rocketeerbkw.com">rocketeerbkw.com</a><br>
+          </p>
         </section>
       </div>
     </div>
